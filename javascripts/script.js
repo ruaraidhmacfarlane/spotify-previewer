@@ -3,8 +3,10 @@ var artistSource = document.getElementById('artist-results-template').innerHTML,
     artistResultsPlaceholder = document.getElementById('artist-results'),
     artistInfoPlaceholder = document.getElementById('artist-info'),
     selectedCssClass = 'selected',
+    playingCssClass = 'playing',
     currentlySelected = null,
-    isArtistInfoDisplayed = false;
+    isArtistInfoDisplayed = false,
+    audioObject = null;
     
 var displayArtistInfo = function(artistData) {
     
@@ -30,6 +32,16 @@ var displayTopTracks = function(targetDiv, artistId)
     getTopTracks(artistId, function (data) {
         var topTracksTemplate = Handlebars.compile(topTracksSource);
         targetDiv.innerHTML = topTracksTemplate(data);
+    });
+    targetDiv.addEventListener('click', function (e) {
+        var target = e.target;
+        if (target !== null && target.classList.contains('album-cover')) {
+            getTrack(target.getAttribute('data-track-id'), function (data) {
+                audioObject = new Audio(data.preview_url);
+                audioObject.play();
+                target.classList.add(playingCssClass);
+            });
+        }
     });
 };
 
@@ -71,6 +83,15 @@ var getTopTracks = function (artistId, callback) {
         }
     });
 };
+
+var getTrack = function (trackId, callback) {
+    $.ajax({
+        url: 'https://api.spotify.com/v1/tracks/' + trackId,
+        success: function (response) {
+            callback(response);
+        }
+    });
+}
 
 var searchArtist = function (query) {
     $.ajax({
