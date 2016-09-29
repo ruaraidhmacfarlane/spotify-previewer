@@ -4,11 +4,12 @@ var artistSource = document.getElementById('artist-results-template').innerHTML,
     artistInfoPlaceholder = document.getElementById('artist-info'),
     selectedCssClass = 'selected',
     currentlySelected = null,
-    artistDisplay = false;
+    isArtistDisplayed = false;
     
 var displayArtistInfo = function(artistData) {
     var div = document.createElement('div');
     div.className = 'jumbotron';
+    div.setAttribute('id', 'artistDisplay');
     artistInfoPlaceholder.appendChild(div);
     
     var header = document.createElement("HEADER");
@@ -19,11 +20,16 @@ var displayArtistInfo = function(artistData) {
     headerClass.appendChild(artistName);
     headerClass.setAttribute('id', 'artistName');
     header.appendChild(headerClass); 
-    artistDisplay = true;
+    isArtistDisplayed = true;
 }
 
 var updateArtistInfo = function(artistData) {
     document.getElementById('artistName').innerHTML = artistData.name;
+}
+
+var removeArtistInfo = function() {
+    isArtistDisplayed = false;
+    document.getElementById('artistDisplay').remove();
 }
 
 var getArtistData = function (artistId, callback) {
@@ -45,6 +51,10 @@ var searchArtist = function (query) {
         success: function (response) {
             // resultsPlaceholder.innerHTML = JSON.stringify(response, null, 2);
             artistResultsPlaceholder.innerHTML = artistTemplate(response);
+            if (isArtistDisplayed)
+            {
+                removeArtistInfo();
+            }
         }
     });
 };
@@ -66,7 +76,7 @@ artistResultsPlaceholder.addEventListener('click', function (e) {
             getArtistData(target.getAttribute('data-artist-id'), function (data) {
                 target.classList.add(selectedCssClass);
                 currentlySelected = target;
-                if (artistDisplay)
+                if (isArtistDisplayed)
                 {
                     updateArtistInfo(data);
                 }
