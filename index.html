@@ -3,6 +3,7 @@
   <meta charset="UTF-8">
   <title>Roo's Web App</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script type="text/javascript" src="javascripts/sly.min.js"></script>
   <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
@@ -30,9 +31,10 @@
       </nav>
       
       <div class="row">
-          <div class="col-xs-12 text-center">
-              <div id="results"></div>
-          </div>
+        <div class="col-xs-12 text-center">
+            <div id="artist-results">
+            </div>
+        </div>
       </div>
       <!-- /.row -->
 
@@ -40,11 +42,10 @@
     <!-- /.container -->
     
     <!---->
-    
-    <script id="results-template" type="text/x-handlebars-template">
+    <script id="artist-results-template" type="text/x-handlebars-template">
       {{#each artists.items}}
         {{#if images}}
-          <div style="background-image:url({{images.0.url}})" class="artist-image"></div>
+          <div style="background-image:url({{images.0.url}})" data-artist-id="{{id}}" class="artist-image"></div>
         {{/if}}
       {{/each}}
     </script>
