@@ -58,10 +58,10 @@
         {{/if}}
       {{/each}}
     </script>
-    <script id="album-results-template" type="text/x-handlebars-template">
-      {{#each items}}
-        {{#if images}}
-          <div style="background-image:url({{images.0.url}})" data-album-id="{{id}}" class="album-cover"></div>
+    <script id="top-track-results-template" type="text/x-handlebars-template">
+      {{#each tracks}}
+        {{#if album.images}}
+          <div style="background-image:url({{album.images.0.url}})" data-track-id="{{id}}" class="album-cover"></div>
           {{/if}}
       {{/each}}
     </script>

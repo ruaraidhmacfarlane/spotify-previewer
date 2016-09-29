@@ -1,5 +1,5 @@
 var artistSource = document.getElementById('artist-results-template').innerHTML,
-    albumsSource = document.getElementById('album-results-template').innerHTML,
+    topTracksSource = document.getElementById('top-track-results-template').innerHTML,
     artistResultsPlaceholder = document.getElementById('artist-results'),
     artistInfoPlaceholder = document.getElementById('artist-info'),
     selectedCssClass = 'selected',
@@ -15,21 +15,21 @@ var displayArtistInfo = function(artistData) {
     
     displayArtistName(div, artistData.name);
     
-    var albumDiv = document.createElement('div');
-    albumDiv.className = 'row';
-    albumDiv.setAttribute('id', 'album-results');
-    div.appendChild(albumDiv);
+    var topTracksDiv = document.createElement('div');
+    topTracksDiv.className = 'row';
+    topTracksDiv.setAttribute('id', 'album-results');
+    div.appendChild(topTracksDiv);
     
-    displayAlbums(albumDiv, artistData.id);
+    displayTopTracks(topTracksDiv, artistData.id);
     
     isArtistInfoDisplayed = true;
 };
 
-var displayAlbums = function(targetDiv, artistId)
+var displayTopTracks = function(targetDiv, artistId)
 {
-    getAlbums(artistId, function (data) {
-        var albumsTemplate = Handlebars.compile(albumsSource);
-        targetDiv.innerHTML = albumsTemplate(data);
+    getTopTracks(artistId, function (data) {
+        var topTracksTemplate = Handlebars.compile(topTracksSource);
+        targetDiv.innerHTML = topTracksTemplate(data);
     });
 };
 
@@ -62,9 +62,9 @@ var getArtistData = function (artistId, callback) {
     });
 };
 
-var getAlbums = function (artistId, callback) {
+var getTopTracks = function (artistId, callback) {
     $.ajax({
-        url: 'https://api.spotify.com/v1/artists/' + artistId + '/albums',
+        url: 'https://api.spotify.com/v1/artists/' + artistId + '/top-tracks?country=GB',
         success: function (response) {
             callback(response);
         }
