@@ -1,4 +1,6 @@
-var resultsPlaceholder = document.querySelector('#results');
+var source = document.getElementById('results-template').innerHTML,
+    template = Handlebars.compile(source),
+    resultsPlaceholder = document.getElementById('results');
 
 var searchArtist = function (query) {
     $.ajax({
@@ -8,7 +10,8 @@ var searchArtist = function (query) {
             type: 'artist'
         },
         success: function (response) {
-            resultsPlaceholder.innerHTML = JSON.stringify(response, null, 2);
+            // resultsPlaceholder.innerHTML = JSON.stringify(response, null, 2);
+            resultsPlaceholder.innerHTML = template(response);
         }
     });
 };

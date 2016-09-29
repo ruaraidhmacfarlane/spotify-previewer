@@ -3,10 +3,10 @@
   <meta charset="UTF-8">
   <title>Roo's Web App</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
   <body>
-    
     <!-- Page Content -->
     <div class="container">
 
@@ -33,9 +33,16 @@
     </div>
     <!-- /.container -->
     
-    
     <!---->
+    
+    <script id="results-template" type="text/x-handlebars-template">
+      {{#each artists.items}}
+        <p>{{name}}</p>
+      {{/each}}
+    </script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
     <script type="text/javascript" src="javascripts/script.js"></script>
+    
     
   </body>
 
