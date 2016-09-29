@@ -1,8 +1,10 @@
 var artistSource = document.getElementById('artist-results-template').innerHTML,
     artistTemplate = Handlebars.compile(artistSource),
-    artistResultsPlaceholder = document.getElementById('artist-results');
+    artistResultsPlaceholder = document.getElementById('artist-results'),
+    selectedCssClass = 'selected',
+    currentlySelected = null;
 
-var getArtistName = function (artistId, callback) {
+var getArtistData = function (artistId, callback) {
     $.ajax({
         url: 'https://api.spotify.com/v1/artists/' + artistId,
         success: function (response) {
@@ -27,29 +29,23 @@ var searchArtist = function (query) {
 
 artistResultsPlaceholder.addEventListener('click', function (e) {
     var target = e.target;
-    if (target !== null && target.classList.contains('artist-image')) {
-        var artistName = getArtistName(target.getAttribute('data-artist-id'), function (data) {
-            alert(data.name);
-        });
-        
-        // if (target.classList.contains(playingCssClass)) {
-        //     audioObject.pause();
-        // } else {
-        //     if (audioObject) {
-        //         audioObject.pause();
-        //     }
-        //     fetchTracks(target.getAttribute('data-album-id'), function (data) {
-        //         audioObject = new Audio(data.tracks.items[0].preview_url);
-        //         audioObject.play();
-        //         target.classList.add(playingCssClass);
-        //         audioObject.addEventListener('ended', function () {
-        //             target.classList.remove(playingCssClass);
-        //         });
-        //         audioObject.addEventListener('pause', function () {
-        //             target.classList.remove(playingCssClass);
-        //         });
-        //     });
-        // }
+    if (target !== null && target.classList.contains('artist-image')) 
+    {
+        if (target.classList.contains(selectedCssClass)) 
+        {
+            alert('here');
+        }
+        else
+        {
+            if (currentlySelected) 
+            {
+                currentlySelected.classList.remove(selectedCssClass);
+            }
+            var artistName = getArtistData(target.getAttribute('data-artist-id'), function (data) {
+                target.classList.add(selectedCssClass);
+                currentlySelected = target;
+            });
+        }
     }
 });
 
