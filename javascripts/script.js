@@ -1,8 +1,26 @@
 var artistSource = document.getElementById('artist-results-template').innerHTML,
     artistTemplate = Handlebars.compile(artistSource),
     artistResultsPlaceholder = document.getElementById('artist-results'),
+    artistInfoPlaceholder = document.getElementById('artist-info'),
     selectedCssClass = 'selected',
-    currentlySelected = null;
+    currentlySelected = null,
+    artistDisplay = null;
+    
+var displayArtistInfo = function(artistData) {
+    var div = document.createElement('div');
+    div.className = 'jumbotron';
+    artistInfoPlaceholder.appendChild(div);
+    
+    var header = document.createElement("HEADER");
+    div.appendChild(header);
+
+    var headerClass = document.createElement("H3");
+    var artistName = document.createTextNode(artistData.name);
+    headerClass.appendChild(artistName);
+
+    header.appendChild(headerClass); 
+    artistDisplay = artistInfoPlaceholder;
+}
 
 var getArtistData = function (artistId, callback) {
     $.ajax({
@@ -41,9 +59,13 @@ artistResultsPlaceholder.addEventListener('click', function (e) {
             {
                 currentlySelected.classList.remove(selectedCssClass);
             }
-            var artistName = getArtistData(target.getAttribute('data-artist-id'), function (data) {
+            getArtistData(target.getAttribute('data-artist-id'), function (data) {
                 target.classList.add(selectedCssClass);
                 currentlySelected = target;
+                if (artistDisplay == null)
+                {
+                    displayArtistInfo(data);
+                }
             });
         }
     }
@@ -53,5 +75,3 @@ document.getElementById('search-form').addEventListener('submit', function (even
     event.preventDefault();
     searchArtist(document.getElementById('query').value);
 }, false);
-
-
