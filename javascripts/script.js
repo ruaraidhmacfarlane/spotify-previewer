@@ -4,7 +4,7 @@ var artistSource = document.getElementById('artist-results-template').innerHTML,
     artistInfoPlaceholder = document.getElementById('artist-info'),
     selectedCssClass = 'selected',
     currentlySelected = null,
-    artistDisplay = null;
+    artistDisplay = false;
     
 var displayArtistInfo = function(artistData) {
     var div = document.createElement('div');
@@ -17,9 +17,13 @@ var displayArtistInfo = function(artistData) {
     var headerClass = document.createElement("H3");
     var artistName = document.createTextNode(artistData.name);
     headerClass.appendChild(artistName);
-
+    headerClass.setAttribute('id', 'artistName');
     header.appendChild(headerClass); 
-    artistDisplay = artistInfoPlaceholder;
+    artistDisplay = true;
+}
+
+var updateArtistInfo = function(artistData) {
+    document.getElementById('artistName').innerHTML = artistData.name;
 }
 
 var getArtistData = function (artistId, callback) {
@@ -62,7 +66,11 @@ artistResultsPlaceholder.addEventListener('click', function (e) {
             getArtistData(target.getAttribute('data-artist-id'), function (data) {
                 target.classList.add(selectedCssClass);
                 currentlySelected = target;
-                if (artistDisplay == null)
+                if (artistDisplay)
+                {
+                    updateArtistInfo(data);
+                }
+                else
                 {
                     displayArtistInfo(data);
                 }
