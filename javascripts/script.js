@@ -17,7 +17,7 @@ var displayArtistInfo = function(artistData) {
     
     var topTracksDiv = document.createElement('div');
     topTracksDiv.className = 'row';
-    topTracksDiv.setAttribute('id', 'album-results');
+    topTracksDiv.setAttribute('id', 'topTrackResults');
     div.appendChild(topTracksDiv);
     
     displayTopTracks(topTracksDiv, artistData.id);
@@ -46,6 +46,7 @@ var displayArtistName = function(targetDiv, artistName) {
 
 var updateArtistInfo = function(artistData) {
     document.getElementById('artistName').innerHTML = artistData.name;
+    displayTopTracks(document.getElementById('topTrackResults'), artistData.id);
 };
 
 var removeArtistInfo = function() {
