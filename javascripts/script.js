@@ -1,36 +1,57 @@
 var artistSource = document.getElementById('artist-results-template').innerHTML,
-    artistTemplate = Handlebars.compile(artistSource),
+    albumsSource = document.getElementById('album-results-template').innerHTML,
     artistResultsPlaceholder = document.getElementById('artist-results'),
     artistInfoPlaceholder = document.getElementById('artist-info'),
     selectedCssClass = 'selected',
     currentlySelected = null,
-    isArtistDisplayed = false;
+    isArtistInfoDisplayed = false;
     
 var displayArtistInfo = function(artistData) {
+    
     var div = document.createElement('div');
     div.className = 'jumbotron';
     div.setAttribute('id', 'artistDisplay');
     artistInfoPlaceholder.appendChild(div);
     
+    displayArtistName(div, artistData.name);
+    
+    var albumDiv = document.createElement('div');
+    albumDiv.className = 'row';
+    albumDiv.setAttribute('id', 'album-results');
+    div.appendChild(albumDiv);
+    
+    displayAlbums(albumDiv, artistData.id);
+    
+    isArtistInfoDisplayed = true;
+};
+
+var displayAlbums = function(targetDiv, artistId)
+{
+    getAlbums(artistId, function (data) {
+        var albumsTemplate = Handlebars.compile(albumsSource);
+        targetDiv.innerHTML = albumsTemplate(data);
+    });
+};
+
+var displayArtistName = function(targetDiv, artistName) {
     var header = document.createElement("HEADER");
-    div.appendChild(header);
+    targetDiv.appendChild(header);
 
     var headerClass = document.createElement("H3");
-    var artistName = document.createTextNode(artistData.name);
-    headerClass.appendChild(artistName);
+    var artistNameNode = document.createTextNode(artistName);
+    headerClass.appendChild(artistNameNode);
     headerClass.setAttribute('id', 'artistName');
     header.appendChild(headerClass); 
-    isArtistDisplayed = true;
-}
+};
 
 var updateArtistInfo = function(artistData) {
     document.getElementById('artistName').innerHTML = artistData.name;
-}
+};
 
 var removeArtistInfo = function() {
-    isArtistDisplayed = false;
+    isArtistInfoDisplayed = false;
     document.getElementById('artistDisplay').remove();
-}
+};
 
 var getArtistData = function (artistId, callback) {
     $.ajax({
@@ -39,7 +60,16 @@ var getArtistData = function (artistId, callback) {
             callback(response);
         }
     });
-}
+};
+
+var getAlbums = function (artistId, callback) {
+    $.ajax({
+        url: 'https://api.spotify.com/v1/artists/' + artistId + '/albums',
+        success: function (response) {
+            callback(response);
+        }
+    });
+};
 
 var searchArtist = function (query) {
     $.ajax({
@@ -49,9 +79,9 @@ var searchArtist = function (query) {
             type: 'artist'
         },
         success: function (response) {
-            // resultsPlaceholder.innerHTML = JSON.stringify(response, null, 2);
+            var artistTemplate = Handlebars.compile(artistSource);
             artistResultsPlaceholder.innerHTML = artistTemplate(response);
-            if (isArtistDisplayed)
+            if (isArtistInfoDisplayed)
             {
                 removeArtistInfo();
             }
@@ -76,7 +106,7 @@ artistResultsPlaceholder.addEventListener('click', function (e) {
             getArtistData(target.getAttribute('data-artist-id'), function (data) {
                 target.classList.add(selectedCssClass);
                 currentlySelected = target;
-                if (isArtistDisplayed)
+                if (isArtistInfoDisplayed)
                 {
                     updateArtistInfo(data);
                 }
@@ -93,3 +123,5 @@ document.getElementById('search-form').addEventListener('submit', function (even
     event.preventDefault();
     searchArtist(document.getElementById('query').value);
 }, false);
+
+

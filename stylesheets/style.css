@@ -21,3 +21,13 @@
 	-moz-box-shadow: 0px 3px 5px rgba(0,0,0,0.2);
 	box-shadow: 0px 3px 5px rgba(0,0,0,0.2);
 }
+
+.album-cover {
+    width: 300px;
+    height: 300px;
+    display: inline-block;
+    background-size: cover;
+}
+.album-cover:hover {
+    cursor: pointer;
+}

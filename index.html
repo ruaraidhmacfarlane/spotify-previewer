@@ -58,6 +58,13 @@
         {{/if}}
       {{/each}}
     </script>
+    <script id="album-results-template" type="text/x-handlebars-template">
+      {{#each items}}
+        {{#if images}}
+          <div style="background-image:url({{images.0.url}})" data-album-id="{{id}}" class="album-cover"></div>
+          {{/if}}
+      {{/each}}
+    </script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
     <script type="text/javascript" src="javascripts/script.js"></script>
     
