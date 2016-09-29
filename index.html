@@ -43,7 +43,9 @@
     
     <script id="results-template" type="text/x-handlebars-template">
       {{#each artists.items}}
-        <p>{{name}}</p>
+        {{#if images}}
+          <div style="background-image:url({{images.0.url}})" class="artist-image"></div>
+        {{/if}}
       {{/each}}
     </script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
