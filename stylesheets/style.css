@@ -35,6 +35,9 @@ body {
 
 .artist-class {
     padding: 10px;
+    letter-spacing: 2px;
+    font-size: 1.2vw;
+    color: red;
     text-align: center;
 }
 

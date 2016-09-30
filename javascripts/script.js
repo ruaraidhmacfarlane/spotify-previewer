@@ -2,6 +2,7 @@ var artistSource = document.getElementById('artist-results-template').innerHTML,
     topTracksSource = document.getElementById('top-track-results-template').innerHTML,
     artistResultsPlaceholder = document.getElementById('artist-results'),
     topTrackPlaceholder = document.getElementById('top-tracks'),
+    nowPlayingPlaceholder = document.getElementById('now-playing')
     selectedCssClass = 'selected',
     playingCssClass = 'playing',
     currentlySelected = null,
@@ -108,10 +109,9 @@ var searchArtist = function (query) {
         success: function (response) {
             var artistTemplate = Handlebars.compile(artistSource);
             artistResultsPlaceholder.innerHTML = artistTemplate(response);
-            if (isArtistInfoDisplayed)
-            {
-                removeArtistInfo();
-            }
+        },
+        error: function(e) {
+            artistResultsPlaceholder.innerHTML = "That search didn't return any results, try searching 'Redpark'...";
         }
     });
 };
@@ -181,6 +181,7 @@ topTrackPlaceholder.addEventListener('click', function (e) {
                     headerClass.appendChild(topTrackNameNode);
                     headerClass.setAttribute('id', 'nowPlaying');
                     topTrackPlaceholder.appendChild(headerClass);
+                    // topTrackPlaceholder.innerHTML = "<h4> Now Playing <h4>"
                     
                     audioObject.addEventListener('ended', function () {
                         target.classList.remove(playingCssClass);
