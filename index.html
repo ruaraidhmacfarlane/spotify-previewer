@@ -5,58 +5,40 @@
     <title>Roo's Web App</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
    
     <!--Bootstrap-->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
   </head>
   <body>
-    <!-- Page Content -->
-    <div class="container">
-  
-      <nav class="navbar navbar-default" role="navigation">
-        <div class="navbar-header col-xs-9">
-          <a class="navbar-brand" href="#">Spotify Artist Browser</a>
-        </div>
-      
-         <!--Collect the nav links, forms, and other content for toggling -->
-        <div class="col-xs-3">
-            <form class="navbar-form" id="search-form">
-              <div class="input-group">
-                  <input type="text" class="form-control" id="query" value="" placeholder="Search Artist"/>
-                  <div class="input-group-btn">
-                      <button class="btn btn-primary" type="submit" id="search" value="Search"><i class="glyphicon glyphicon-search"></i></button>
-                  </div>
-              </div>
-            </form>
-        </div>
-      </nav>
-      
-      <div id="artist-results" class="artist-class row">
-      <!--  <div style="background-image:url(https://i.scdn.co/image/59195cb7257918246e6e0ae2b58d011e599f4c36)" data-artist-id="69GGBxA162lTqCwzJG5jLp" class="artist-image selected"></div>-->
-      <!--  <div style="background-image:url(https://i.scdn.co/image/59195cb7257918246e6e0ae2b58d011e599f4c36)" data-artist-id="69GGBxA162lTqCwzJG5jLp" class="artist-image selected"></div>-->
-      <!--  <div style="background-image:url(https://i.scdn.co/image/59195cb7257918246e6e0ae2b58d011e599f4c36)" data-artist-id="69GGBxA162lTqCwzJG5jLp" class="artist-image selected"></div>-->
-      <!--  <div style="background-image:url(https://i.scdn.co/image/59195cb7257918246e6e0ae2b58d011e599f4c36)" data-artist-id="69GGBxA162lTqCwzJG5jLp" class="artist-image selected"></div>-->
-      <!--  <div style="background-image:url(https://i.scdn.co/image/59195cb7257918246e6e0ae2b58d011e599f4c36)" data-artist-id="69GGBxA162lTqCwzJG5jLp" class="artist-image selected"></div>-->
-      <!--  <div style="background-image:url(https://i.scdn.co/image/59195cb7257918246e6e0ae2b58d011e599f4c36)" data-artist-id="69GGBxA162lTqCwzJG5jLp" class="artist-image selected"></div>-->
-      <!--  <div style="background-image:url(https://i.scdn.co/image/59195cb7257918246e6e0ae2b58d011e599f4c36)" data-artist-id="69GGBxA162lTqCwzJG5jLp" class="artist-image selected"></div>-->
-      <!--  <div style="background-image:url(https://i.scdn.co/image/59195cb7257918246e6e0ae2b58d011e599f4c36)" data-artist-id="69GGBxA162lTqCwzJG5jLp" class="artist-image selected"></div>-->
-      <!--  <div style="background-image:url(https://i.scdn.co/image/59195cb7257918246e6e0ae2b58d011e599f4c36)" data-artist-id="69GGBxA162lTqCwzJG5jLp" class="artist-image selected"></div>-->
-      <!--  <div style="background-image:url(https://i.scdn.co/image/59195cb7257918246e6e0ae2b58d011e599f4c36)" data-artist-id="69GGBxA162lTqCwzJG5jLp" class="artist-image selected"></div>-->
-      <!--  <div style="background-image:url(https://i.scdn.co/image/59195cb7257918246e6e0ae2b58d011e599f4c36)" data-artist-id="69GGBxA162lTqCwzJG5jLp" class="artist-image selected"></div>-->
-      <!--  <div style="background-image:url(https://i.scdn.co/image/59195cb7257918246e6e0ae2b58d011e599f4c36)" data-artist-id="69GGBxA162lTqCwzJG5jLp" class="artist-image selected"></div>-->
-      <!--  <div style="background-image:url(https://i.scdn.co/image/59195cb7257918246e6e0ae2b58d011e599f4c36)" data-artist-id="69GGBxA162lTqCwzJG5jLp" class="artist-image selected"></div>-->
-      <!--  <div style="background-image:url(https://i.scdn.co/image/59195cb7257918246e6e0ae2b58d011e599f4c36)" data-artist-id="69GGBxA162lTqCwzJG5jLp" class="artist-image selected"></div>-->
-      </div>
-      
-      <div id="top-tracks" class="top-tracks-class row">
-      </div>
-
-    </div>
-    <!-- /.container -->
     
-    <!---->
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="navbar-header col-xs-9">
+        <a class="navbar-brand" href="#">Spotify Artist Browser</a>
+      </div>
+    
+       <!--Collect the nav links, forms, and other content for toggling -->
+      <div class="col-xs-3">
+          <form class="navbar-form" id="search-form">
+            <div class="input-group">
+                <input type="text" class="form-control" id="query" value="" placeholder="Search Artist"/>
+                <div class="input-group-btn">
+                    <button class="btn btn-primary" type="submit" id="search" value="Search"><i class="glyphicon glyphicon-search"></i></button>
+                </div>
+            </div>
+          </form>
+      </div>
+    </nav>
+    
+    <div id="artist-results" class="artist-class row">
+    </div>
+    
+    <div id="top-tracks" class="top-tracks-class row">
+    </div>
+
+    <div id="now-playing" class="now-playing-class row">
+    </div>
+    
     <script id="artist-results-template" type="text/x-handlebars-template">
       {{#each_upto artists.items 5}}
         {{#if images}}
@@ -74,7 +56,6 @@
     
     <!--My script-->
     <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
-    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>	
     <script type="text/javascript" src="javascripts/script.js"></script>
     </script>
 

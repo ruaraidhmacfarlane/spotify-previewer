@@ -1,4 +1,19 @@
+html {
+  font-family: sans-serif;
+  -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+}
+
+.container {
+    height: 100%;
+    background-color: rgba(100, 100, 100, 0.5);
+}
+
 .artist-class {
+    padding: 5px;
     text-align: center;
 }
 
@@ -7,6 +22,7 @@
 }
 
 .artist-image {
+    margin: 10px;
     width: 100px;
     height: 100px;
     border-radius: 50%;
@@ -31,6 +47,7 @@
 }
 
 .album-cover {
+    margin: 15px;
     width: 150px;
     height: 150px;
     display: inline-block;

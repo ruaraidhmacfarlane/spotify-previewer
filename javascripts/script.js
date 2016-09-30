@@ -1,7 +1,3 @@
-$(document).ready(function(){
-    $('.single-item').slick();
-});
-
 var artistSource = document.getElementById('artist-results-template').innerHTML,
     topTracksSource = document.getElementById('top-track-results-template').innerHTML,
     artistResultsPlaceholder = document.getElementById('artist-results'),
@@ -15,7 +11,7 @@ var artistSource = document.getElementById('artist-results-template').innerHTML,
 var displayArtistInfo = function(artistData) {
     
     var div = document.createElement('div');
-    div.className = 'jumbotron';
+    div.className = 'row';
     div.setAttribute('id', 'artistDisplay');
     topTrackPlaceholder.appendChild(div);
     
