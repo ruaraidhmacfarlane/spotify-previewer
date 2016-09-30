@@ -57,6 +57,10 @@ var updateArtistInfo = function(artistData) {
     if (audioObject) 
     {
         audioObject.pause();
+        if (document.getElementById('nowPlaying'))
+        {
+            document.getElementById('nowPlaying').remove();
+        }
     }
     document.getElementById('artistName').innerHTML = artistData.name;
     displayTopTracks(document.getElementById('topTrackResults'), artistData.id);
@@ -153,17 +157,30 @@ topTrackPlaceholder.addEventListener('click', function (e) {
         {
             if (target.classList.contains(playingCssClass)) {
                 audioObject.pause();
+                document.getElementById('nowPlaying').remove();
             } 
             else 
             {
                 if (audioObject) 
                 {
                     audioObject.pause();
+                    if (document.getElementById('nowPlaying'))
+                    {
+                        document.getElementById('nowPlaying').remove();
+                    }
+                    
                 }
                 getTrack(target.getAttribute('data-track-id'), function (data) {
                     audioObject = new Audio(data.preview_url);
                     audioObject.play();
                     target.classList.add(playingCssClass);
+                    
+                    var headerClass = document.createElement("H4");
+                    
+                    var topTrackNameNode = document.createTextNode("Now Playing: " + data.name);
+                    headerClass.appendChild(topTrackNameNode);
+                    headerClass.setAttribute('id', 'nowPlaying');
+                    topTrackPlaceholder.appendChild(headerClass);
                     
                     audioObject.addEventListener('ended', function () {
                         target.classList.remove(playingCssClass);
