@@ -1,9 +1,5 @@
 body {
     margin: 0px !important;
-    background-position: 0px 0px;
-    background-size: cover;
-    background-repeat: no-repeat;
-    /*text-shadow: 0 1px 3px rgba(0,0,0, 0.5);*/
 }
 
 .navbar {
@@ -14,7 +10,6 @@ body {
     background: -webkit-linear-gradient(-45deg,  rgba(0,0,0,1) 0%,rgba(0,0,0,0.95) 8%,rgba(28,28,28,0.87) 20%,rgba(28,28,28,0.83) 26%,rgba(28,28,28,0.82) 28%,rgba(43,43,43,0.79) 33%,rgba(17,17,17,0.73) 41%,rgba(0,0,0,0.69) 47%,rgba(44,44,44,0.65) 53%,rgba(44,44,44,0.64) 55%,rgba(43,43,43,0.62) 58%,rgba(43,43,43,0.6) 61%,rgba(43,43,43,0.59) 63%,rgba(43,43,43,0.58) 64%,rgba(43,43,43,0.55) 68%,rgba(71,71,71,0.51) 74%,rgba(102,102,102,0.44) 84%,rgba(89,89,89,0.37) 93%,rgba(76,76,76,0.32) 100%); /* Chrome10-25,Safari5.1-6 */
     background: linear-gradient(135deg,  rgba(0,0,0,1) 0%,rgba(0,0,0,0.95) 8%,rgba(28,28,28,0.87) 20%,rgba(28,28,28,0.83) 26%,rgba(28,28,28,0.82) 28%,rgba(43,43,43,0.79) 33%,rgba(17,17,17,0.73) 41%,rgba(0,0,0,0.69) 47%,rgba(44,44,44,0.65) 53%,rgba(44,44,44,0.64) 55%,rgba(43,43,43,0.62) 58%,rgba(43,43,43,0.6) 61%,rgba(43,43,43,0.59) 63%,rgba(43,43,43,0.58) 64%,rgba(43,43,43,0.55) 68%,rgba(71,71,71,0.51) 74%,rgba(102,102,102,0.44) 84%,rgba(89,89,89,0.37) 93%,rgba(76,76,76,0.32) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#524c4c4c',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-
 }
 
 .navbar-brand {
@@ -56,6 +51,9 @@ body {
     border-radius: 50%;
     display: inline-block;
     background-size: cover;
+    -webkit-box-shadow: 0px 3px 5px rgba(0,0,0,0.2);
+	-moz-box-shadow: 0px 3px 5px rgba(0,0,0,0.2);
+	box-shadow: 0px 3px 5px rgba(0,0,0,0.2);
 }
 
 .artist-image:hover {
@@ -81,6 +79,9 @@ body {
     height: 150px;
     display: inline-block;
     background-size: cover;
+    -webkit-box-shadow: 0px 3px 5px rgba(0,0,0,0.2);
+	-moz-box-shadow: 0px 3px 5px rgba(0,0,0,0.2);
+	box-shadow: 0px 3px 5px rgba(0,0,0,0.2);
 }
 .album-cover:hover {
     cursor: pointer;

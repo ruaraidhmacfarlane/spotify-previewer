@@ -45,6 +45,12 @@ var displayArtistName = function(targetDiv, artistName) {
     headerClass.appendChild(artistNameNode);
     headerClass.setAttribute('id', 'artistName');
     header.appendChild(headerClass); 
+    
+    var headerClass = document.createElement("H4");
+    var topTrackNameNode = document.createTextNode("Top Tracks");
+    headerClass.appendChild(topTrackNameNode);
+    headerClass.setAttribute('id', 'topTrackName');
+    header.appendChild(headerClass); 
 };
 
 var updateArtistInfo = function(artistData) {
