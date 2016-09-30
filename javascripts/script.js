@@ -1,7 +1,11 @@
+$(document).ready(function(){
+    $('.single-item').slick();
+});
+
 var artistSource = document.getElementById('artist-results-template').innerHTML,
     topTracksSource = document.getElementById('top-track-results-template').innerHTML,
     artistResultsPlaceholder = document.getElementById('artist-results'),
-    artistInfoPlaceholder = document.getElementById('artist-info'),
+    topTrackPlaceholder = document.getElementById('top-tracks'),
     selectedCssClass = 'selected',
     playingCssClass = 'playing',
     currentlySelected = null,
@@ -13,7 +17,7 @@ var displayArtistInfo = function(artistData) {
     var div = document.createElement('div');
     div.className = 'jumbotron';
     div.setAttribute('id', 'artistDisplay');
-    artistInfoPlaceholder.appendChild(div);
+    topTrackPlaceholder.appendChild(div);
     
     displayArtistName(div, artistData.name);
     
@@ -106,6 +110,16 @@ var searchArtist = function (query) {
     });
 };
 
+Handlebars.registerHelper('each_upto', function(ary, max, options) {
+    if(!ary || ary.length == 0)
+        return options.inverse(this);
+
+    var result = [ ];
+    for(var i = 0; i < max && i < ary.length; ++i)
+        result.push(options.fn(ary[i]));
+    return result.join('');
+});
+
 artistResultsPlaceholder.addEventListener('click', function (e) {
     var target = e.target;
     if (target !== null && target.classList.contains('artist-image')) 
@@ -131,7 +145,7 @@ artistResultsPlaceholder.addEventListener('click', function (e) {
     }
 });
 
-artistInfoPlaceholder.addEventListener('click', function (e) {
+topTrackPlaceholder.addEventListener('click', function (e) {
         var target = e.target;
         if (target !== null && target.classList.contains('album-cover')) 
         {
@@ -164,5 +178,3 @@ document.getElementById('search-form').addEventListener('submit', function (even
     event.preventDefault();
     searchArtist(document.getElementById('query').value);
 }, false);
-
-
