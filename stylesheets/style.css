@@ -1,14 +1,10 @@
 html {
-  font-family: sans-serif;
-  -webkit-text-size-adjust: 100%;
-      -ms-text-size-adjust: 100%;
+    font-family: sans-serif;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
 }
 body {
-  margin: 0;
-}
-
-.container {
-    height: 100%;
+    margin: 0;
     background-color: rgba(100, 100, 100, 0.5);
 }
 
@@ -48,6 +44,7 @@ body {
 
 .album-cover {
     margin: 15px;
+    margin-top: 25px;
     width: 150px;
     height: 150px;
     display: inline-block;

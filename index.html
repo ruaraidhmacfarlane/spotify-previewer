@@ -30,14 +30,17 @@
       </div>
     </nav>
     
-    <div id="artist-results" class="artist-class row">
+    <div class="container">
+      <div id="artist-results" class="artist-class row">
+      </div>
+      
+      <div id="top-tracks" class="top-tracks-class row">
+      </div>
+  
+      <div id="now-playing" class="now-playing-class row">
+      </div>
     </div>
     
-    <div id="top-tracks" class="top-tracks-class row">
-    </div>
-
-    <div id="now-playing" class="now-playing-class row">
-    </div>
     
     <script id="artist-results-template" type="text/x-handlebars-template">
       {{#each_upto artists.items 5}}
