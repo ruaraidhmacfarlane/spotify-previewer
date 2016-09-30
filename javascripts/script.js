@@ -33,16 +33,7 @@ var displayTopTracks = function(targetDiv, artistId)
         var topTracksTemplate = Handlebars.compile(topTracksSource);
         targetDiv.innerHTML = topTracksTemplate(data);
     });
-    targetDiv.addEventListener('click', function (e) {
-        var target = e.target;
-        if (target !== null && target.classList.contains('album-cover')) {
-            getTrack(target.getAttribute('data-track-id'), function (data) {
-                audioObject = new Audio(data.preview_url);
-                audioObject.play();
-                target.classList.add(playingCssClass);
-            });
-        }
-    });
+    
 };
 
 var displayArtistName = function(targetDiv, artistName) {
@@ -57,13 +48,17 @@ var displayArtistName = function(targetDiv, artistName) {
 };
 
 var updateArtistInfo = function(artistData) {
+    if (audioObject) 
+    {
+        audioObject.pause();
+    }
     document.getElementById('artistName').innerHTML = artistData.name;
     displayTopTracks(document.getElementById('topTrackResults'), artistData.id);
 };
 
 var removeArtistInfo = function() {
-    isArtistInfoDisplayed = false;
-    document.getElementById('artistDisplay').remove();
+    // document.getElementById('artistDisplay').remove();
+    // topTrackPlaceholder()
 };
 
 var getArtistData = function (artistId, callback) {
@@ -91,7 +86,7 @@ var getTrack = function (trackId, callback) {
             callback(response);
         }
     });
-}
+};
 
 var searchArtist = function (query) {
     $.ajax({
@@ -115,31 +110,55 @@ artistResultsPlaceholder.addEventListener('click', function (e) {
     var target = e.target;
     if (target !== null && target.classList.contains('artist-image')) 
     {
-        if (target.classList.contains(selectedCssClass)) 
+        if (currentlySelected) 
         {
-            alert('here');
+            currentlySelected.classList.remove(selectedCssClass);
         }
-        else
-        {
-            if (currentlySelected) 
+
+        getArtistData(target.getAttribute('data-artist-id'), function (data) {
+            
+            target.classList.add(selectedCssClass);
+            currentlySelected = target;
+            if (isArtistInfoDisplayed)
             {
-                currentlySelected.classList.remove(selectedCssClass);
+                updateArtistInfo(data);
             }
-            getArtistData(target.getAttribute('data-artist-id'), function (data) {
-                target.classList.add(selectedCssClass);
-                currentlySelected = target;
-                if (isArtistInfoDisplayed)
-                {
-                    updateArtistInfo(data);
-                }
-                else
-                {
-                    displayArtistInfo(data);
-                }
-            });
-        }
+            else
+            {
+                displayArtistInfo(data);
+            }
+        });
     }
 });
+
+artistInfoPlaceholder.addEventListener('click', function (e) {
+        var target = e.target;
+        if (target !== null && target.classList.contains('album-cover')) 
+        {
+            if (target.classList.contains(playingCssClass)) {
+                audioObject.pause();
+            } 
+            else 
+            {
+                if (audioObject) 
+                {
+                    audioObject.pause();
+                }
+                getTrack(target.getAttribute('data-track-id'), function (data) {
+                    audioObject = new Audio(data.preview_url);
+                    audioObject.play();
+                    target.classList.add(playingCssClass);
+                    
+                    audioObject.addEventListener('ended', function () {
+                        target.classList.remove(playingCssClass);
+                    });
+                    audioObject.addEventListener('pause', function () {
+                        target.classList.remove(playingCssClass);
+                    });
+                });
+            }
+        }
+    });
 
 document.getElementById('search-form').addEventListener('submit', function (event) {
     event.preventDefault();
