@@ -47,6 +47,13 @@ body {
     text-align: center;
 }
 
+.now-playing-class {
+    margin: 40px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
 .artist-image {
     margin: 10px;
     width: 100px;

@@ -2,7 +2,7 @@ var artistSource = document.getElementById('artist-results-template').innerHTML,
     topTracksSource = document.getElementById('top-track-results-template').innerHTML,
     artistResultsPlaceholder = document.getElementById('artist-results'),
     topTrackPlaceholder = document.getElementById('top-tracks'),
-    nowPlayingPlaceholder = document.getElementById('now-playing')
+    nowPlayingPlaceholder = document.getElementById('now-playing'),
     selectedCssClass = 'selected',
     playingCssClass = 'playing',
     currentlySelected = null,
@@ -58,10 +58,7 @@ var updateArtistInfo = function(artistData) {
     if (audioObject) 
     {
         audioObject.pause();
-        if (document.getElementById('nowPlaying'))
-        {
-            document.getElementById('nowPlaying').remove();
-        }
+        nowPlayingPlaceholder.innerHTML = "";
     }
     document.getElementById('artistName').innerHTML = artistData.name;
     displayTopTracks(document.getElementById('topTrackResults'), artistData.id);
@@ -157,17 +154,14 @@ topTrackPlaceholder.addEventListener('click', function (e) {
         {
             if (target.classList.contains(playingCssClass)) {
                 audioObject.pause();
-                document.getElementById('nowPlaying').remove();
+                nowPlayingPlaceholder.innerHTML = "";
             } 
             else 
             {
                 if (audioObject) 
                 {
                     audioObject.pause();
-                    if (document.getElementById('nowPlaying'))
-                    {
-                        document.getElementById('nowPlaying').remove();
-                    }
+                    nowPlayingPlaceholder.innerHTML = "";
                     
                 }
                 getTrack(target.getAttribute('data-track-id'), function (data) {
@@ -175,13 +169,7 @@ topTrackPlaceholder.addEventListener('click', function (e) {
                     audioObject.play();
                     target.classList.add(playingCssClass);
                     
-                    var headerClass = document.createElement("H4");
-                    
-                    var topTrackNameNode = document.createTextNode("Now Playing: " + data.name);
-                    headerClass.appendChild(topTrackNameNode);
-                    headerClass.setAttribute('id', 'nowPlaying');
-                    topTrackPlaceholder.appendChild(headerClass);
-                    // topTrackPlaceholder.innerHTML = "<h4> Now Playing <h4>"
+                    nowPlayingPlaceholder.innerHTML = '<h4> <strong>Now Playing: </strong><i>' + data.name + '</i></h4>';
                     
                     audioObject.addEventListener('ended', function () {
                         target.classList.remove(playingCssClass);
