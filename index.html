@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Roo's Web App</title>
+    <title>Spotify Previewer</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
    
@@ -13,20 +13,22 @@
   <body>
     
     <nav class="navbar navbar-default" role="navigation">
-      <div class="navbar-header col-xs-9">
-        <a class="navbar-brand" href="#">Spotify Artist Browser</a>
-      </div>
-    
-       <!--Collect the nav links, forms, and other content for toggling -->
-      <div class="col-xs-3">
-          <form class="navbar-form" id="search-form">
-            <div class="input-group">
-                <input type="text" class="form-control" id="query" value="" placeholder="Search Artist"/>
-                <div class="input-group-btn">
-                    <button class="btn btn-primary" type="submit" id="search" value="Search"><i class="glyphicon glyphicon-search"></i></button>
-                </div>
-            </div>
-          </form>
+      <div class="header">
+        <div class="navbar-header col-xs-6">
+          <a class="navbar-brand" href="#">Spotify Previewer</a>
+        </div>
+      
+         <!--Collect the nav links, forms, and other content for toggling -->
+        <div class="col-xs-6">
+            <form class="navbar-form" id="search-form">
+              <div class="input-group">
+                  <input type="text" class="form-control" id="query" value="" placeholder="Search Artist"/>
+                  <div class="input-group-btn">
+                      <button class="btn btn-primary btn-search" type="submit" id="search" value="Search"><i class="glyphicon glyphicon-search"></i></button>
+                  </div>
+              </div>
+            </form>
+        </div>
       </div>
     </nav>
     
