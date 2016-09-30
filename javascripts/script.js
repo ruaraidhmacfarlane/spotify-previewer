@@ -47,7 +47,7 @@ var displayArtistName = function(targetDiv, artistName) {
     headerClass.setAttribute('id', 'artistName');
     header.appendChild(headerClass); 
     
-    var headerClass = document.createElement("H4");
+    headerClass = document.createElement("H4");
     var topTrackNameNode = document.createTextNode("Top Tracks");
     headerClass.appendChild(topTrackNameNode);
     headerClass.setAttribute('id', 'topTrackName');
@@ -62,11 +62,6 @@ var updateArtistInfo = function(artistData) {
     }
     document.getElementById('artistName').innerHTML = artistData.name;
     displayTopTracks(document.getElementById('topTrackResults'), artistData.id);
-};
-
-var removeArtistInfo = function() {
-    // document.getElementById('artistDisplay').remove();
-    // topTrackPlaceholder()
 };
 
 var getArtistData = function (artistId, callback) {
